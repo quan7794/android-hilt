@@ -14,24 +14,17 @@
  * limitations under the License.
  */
 
-package com.example.android.hilt.data
+package com.example.android.hilt.data.local
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
 /**
- * Data access object to query the database.
+ * Data class that represent the a table in the database.
  */
-@Dao
-interface LogDao {
+@Entity(tableName = "logs")
+data class Log(val msg: String, val timestamp: Long) {
 
-    @Query("SELECT * FROM logs ORDER BY id DESC")
-    fun getAll(): List<Log>
-
-    @Insert
-    fun insertAll(vararg logs: Log)
-
-    @Query("DELETE FROM logs")
-    fun nukeTable()
+    @PrimaryKey(autoGenerate = true)
+    var id: Long = 0
 }

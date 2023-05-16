@@ -14,17 +14,15 @@
  * limitations under the License.
  */
 
-package com.example.android.hilt.data
+package com.example.android.hilt.data.local
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
+import androidx.room.Database
+import androidx.room.RoomDatabase
 
 /**
- * Data class that represent the a table in the database.
+ * SQLite Database for storing the logs.
  */
-@Entity(tableName = "logs")
-data class Log(val msg: String, val timestamp: Long) {
-
-    @PrimaryKey(autoGenerate = true)
-    var id: Long = 0
+@Database(entities = arrayOf(Log::class), version = 1, exportSchema = false)
+abstract class AppDatabase : RoomDatabase() {
+    abstract fun logDao(): LogDao
 }
